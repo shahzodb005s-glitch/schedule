@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Manager v16.0</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-logo">Oriental<span>School</span></div>
+        <div class="nav-links">
+            <a href="index.html" class="nav-btn active" id="navMain">🗓️ Расписание</a>
+            <a href="students.html" class="nav-btn" id="navStats">👥 Ученики</a>
+            <a href="stat.html" class="nav-btn" id="navRating">📊 Рейтинг</a>
+        </div>
+        <div class="nav-actions">
+            <button class="export-btn" onclick="exportData()">📤 Экспорт</button>
+<input type="file" id="importFile" hidden onchange="importData(event)">
+<button class="import-btn" onclick="document.getElementById('importFile').click()">📥 Импорт</button>
+            <button class="lang-btn" onclick="toggleLang()">RU / UZ</button>
+            <button class="fs-btn" onclick="toggleFullScreen()">📺 Экран</button>
+            <button class="print-btn" onclick="window.print()">🖨️ Печать</button>
+            <button class="reset-btn" id="btnResetTop" onclick="clearAll()">🗑️ Сброс</button>
+        </div>
+    </nav>
+
+    <main class="page active">
+        <div class="setup-grid">
+
+            <!-- ПРЕДМЕТЫ -->
+            <div class="card">
+                <h3 id="tSubj">📚 Предметы</h3>
+                <div class="input-row">
+                    <input type="text" id="subjectInput">
+                    <button class="add-btn" onclick="addSubject()">+</button>
+                </div>
+                <div id="subjectsList" class="tags-container"></div>
+            </div>
+
+            <!-- УЧИТЕЛЯ -->
+            <div class="card">
+                <h3 id="tTeach">👨‍🏫 Учителя</h3>
+                <div class="input-row">
+                    <input type="text" id="teacherInput">
+                    <select id="teacherSubjectSelect"></select>
+                    <button class="add-btn" onclick="addTeacher()">+</button>
+                </div>
+                <div id="teachersList" class="tags-container"></div>
+            </div>
+
+            <!-- КЛАССЫ -->
+            <div class="card">
+                <h3 id="tClass">🏫 Классы</h3>
+                <div class="input-row">
+                    <input type="text" id="classInput" placeholder="Напр: 1-А">
+                    <button onclick="addClass()">+</button>
+                </div>
+                <div id="classesList" class="tags-container"></div>
+            </div>
+
+        </div>
+
+        <div class="table-scroll-area" id="tableContainer">
+            <table id="mainTable">
+                <thead>
+                    <tr id="daysHeader"></tr>
+                    <tr id="lessonsHeader"></tr>
+                </thead>
+                <tbody id="tableBody"></tbody>
+            </table>
+        </div>
+        
+        <div class="danger-zone-inline">
+            <button class="danger-btn" onclick="clearAll()" id="btnResetBottom">🗑️ Сбросить всё</button>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Учет учеников</title>
+    <link rel="stylesheet" href="./students.css">
+</head>
+
+<body onload="init()">
+
+<nav class="navbar">
+    <div class="nav-logo">Oriental<span>School</span></div>
+
+    <div class="nav-links">
+        <a href="index.html" class="nav-btn">🗓️ Расписание</a>
+        <a href="students.html" class="nav-btn active">👥 Ученики</a>
+        <a href="stat.html" class="nav-btn">📊 Рейтинг</a>
+    </div>
+
+    <div class="nav-actions">
+        <button class="lang-btn" onclick="toggleLang()">RU / UZ</button>
+        <button class="print-btn" onclick="window.print()">🖨️ Печать</button>
+
+        <!-- 🔥 ДОБАВИЛИ (было в JS, но не было в HTML) -->
+        <button class="lang-btn" onclick="exportData()">⬇ Export</button>
+        <button class="print-btn" onclick="importData()">⬆ Import</button>
+    </div>
+</nav>
+
+<div class="container">
+
+    <div class="main-counter-card no-print">
+    <div class="counter-info">
+        <span>Всего учеников:</span>
+        <h1 id="globalTotalDisplay">0</h1>
+
+        <!-- 🔥 ДОБАВИЛИ УЧИТЕЛЕЙ -->
+        <span>Всего учителей:</span>
+        <h2 id="teacherCountDisplay">0</h2>
+    </div>
+</div>
+
+    <div class="grid-layout">
+
+        <div class="card no-print">
+            <h3>📝 Ввод данных (2025-2026)</h3>
+
+                     <label>Год</label>
+<select id="yearSelect" onchange="changeYear()">
+    <option value="2025">2025</option>
+    <option value="2024">2024</option>
+    <option value="2023">2023</option>
+</select>
+
+            <div class="form-group">
+                <label>Месяц:</label>
+                <select id="monthSelect" onchange="changeDate()"></select>
+
+                <label>Класс:</label>
+                <select id="classSelect"></select>
+
+                <div class="input-split">
+                    <div class="input-field">
+                        <label>Мальчики (М)</label>
+                        <input type="text" id="boysInp" placeholder="+ / -">
+                    </div>
+
+                    <div class="input-field">
+                        <label>Девочки (Д)</label>
+                        <input type="text" id="girlsInp" placeholder="+ / -">
+                    </div>
+                </div>
+
+                <button class="btn-update" onclick="handleSave()">Сохранить</button>
+                <button class="btn-copy" onclick="copyPrevMonth()">📋 Копировать прошлый месяц</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <label>Учителя (изменить):</label>
+<input type="text" id="teacherInp" placeholder="+10 / -5 / 500">
+<button class="teacher-btn" onclick="updateTeachers(document.getElementById('teacherInp').value)">
+    Обновить учителей
+</button>   
+            <div id="monthTitle" class="month-badge">Март 2025</div>
+
+            <div id="tableWrapper"></div>
+
+            <div class="summary-footer">
+                <div class="summary-row total-now">
+                    <span>Сейчас в выбранном месяце:</span>
+                    <strong id="footerTotal">0</strong>
+                </div>
+
+                <div class="summary-row movement">
+                    <div class="mov-item">
+                        <span>Пришло (+):</span>
+                        <strong id="footerIn" style="color: #27ae60;">+0</strong>
+                    </div>
+
+                    <div class="mov-item">
+                        <span>Ушло (-):</span>
+                        <strong id="footerOut" style="color: #e74c3c;">-0</strong>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script src="./students.js"></script>
+</body>
+</html>
